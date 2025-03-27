@@ -3,7 +3,7 @@ const userRouter = require("./Routes/userRouter");
 const taskRouter = require("./Routes/taskRouter");
 const mongoose = require("mongoose");
 const errorHandler = require("./middlewares/ErrorHandlerMiddleware");
-const cors=require("cors");
+const cors = require("cors");
 
 const app = express();
 //database
@@ -22,6 +22,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 //Routes
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
 app.use("/", userRouter);
 app.use("/", taskRouter);
 //!eerror
