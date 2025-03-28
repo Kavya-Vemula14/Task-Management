@@ -17,10 +17,13 @@ mongoose
 //middleware
 //! Cors config
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: [
+    "http://localhost:5173",
+    "https://task-management-frontend-a28fj1hyd-kavya-vemulas-projects.vercel.app", // Replace with actual URL
+  ],
+  credentials: true,
 };
 app.use(cors(corsOptions));
-app.use(express.json());
 //Routes
 app.get("/", (req, res) => {
   res.send("Backend is working!");

@@ -1,58 +1,50 @@
 import axios from "axios";
-import { BASE_URL } from "../../utils/url";
+
+// Backend Base URL
+const BASE_URL =
+  "https://task-management-backend-3gajlaoau-kavya-vemulas-projects.vercel.app";
+
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
+
 //! Get the token
 const token = getUserFromStorage();
-//! Login
+const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+//! Login API
 export const loginAPI = async ({ email, password }) => {
-  const response = await axios.post(`${BASE_URL}/users/login`, {
+  const response = await axios.post(`${BASE_URL}/api/v1/users/login`, {
     email,
     password,
   });
-  //Return a promise
   return response.data;
 };
-//! register
+
+//! Register API
 export const registerAPI = async ({ email, password, username }) => {
-  const response = await axios.post(`${BASE_URL}/users/register`, {
+  const response = await axios.post(`${BASE_URL}/api/v1/users/register`, {
     email,
     password,
     username,
   });
-  //Return a promise
-  return response.data;
-};
-//! change password
-export const changePasswordAPI = async (newPassword) => {
-  const response = await axios.put(
-    `${BASE_URL}/users/change-password`,
-    {
-      newPassword,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  //Return a promise
   return response.data;
 };
 
-//! update Profile
+//! Change Password API
+export const changePasswordAPI = async (newPassword) => {
+  const response = await axios.put(
+    `${BASE_URL}/api/v1/users/change-password`,
+    { newPassword },
+    { headers }
+  );
+  return response.data;
+};
+
+//! Update Profile API
 export const updateProfileAPI = async ({ email, username }) => {
   const response = await axios.put(
-    `${BASE_URL}/users/update-profile`,
-    {
-      email,
-      username,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    `${BASE_URL}/api/v1/users/update-profile`,
+    { email, username },
+    { headers }
   );
-  //Return a promise
   return response.data;
 };
