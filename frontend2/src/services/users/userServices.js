@@ -1,78 +1,59 @@
 import axios from "axios";
+//import { BASE_URL } from "../../utils/url";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
-
-// Use relative API path to work with Vite proxy
-const BASE_URL = "/api"; // No need for full backend URL when using proxy
-
-// Axios instance with base URL
-const api = axios.create({
-  baseURL: BASE_URL,
-});
-
-// Function to get updated headers
-const getAuthHeaders = () => {
-  const token = getUserFromStorage();
-  return token ? { Authorization: `Bearer ${token}` } : {};
-};
-
-//! Login API
+const BASE_URL = "/api/v1";
+//! Get the token
+const token = getUserFromStorage();
+//! Login
 export const loginAPI = async ({ email, password }) => {
-  try {
-    const response = await api.post("/v1/users/login", { email, password });
-    return response.data;
-  } catch (error) {
-    console.error("Login error:", error.response?.data || error.message);
-    throw error;
-  }
+  const response = await axios.post(`${BASE_URL}/users/login`, {
+    email,
+    password,
+  });
+  //Return a promise
+  return response.data;
 };
-
-//! Register API
+//! register
 export const registerAPI = async ({ email, password, username }) => {
-  try {
-    const response = await api.post("/v1/users/register", {
-      email,
-      password,
-      username,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Register error:", error.response?.data || error.message);
-    throw error;
-  }
+  const response = await axios.post(`${BASE_URL}/users/register`, {
+    email,
+    password,
+    username,
+  });
+  //Return a promise
+  return response.data;
 };
-
-//! Change Password API
+//! change password
 export const changePasswordAPI = async (newPassword) => {
-  try {
-    const response = await api.put(
-      "/v1/users/change-password",
-      { newPassword },
-      { headers: getAuthHeaders() }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Change password error:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
+  const response = await axios.put(
+    `${BASE_URL}/users/change-password`,
+    {
+      newPassword,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //Return a promise
+  return response.data;
 };
 
-//! Update Profile API
+//! update Profile
 export const updateProfileAPI = async ({ email, username }) => {
-  try {
-    const response = await api.put(
-      "/v1/users/update-profile",
-      { email, username },
-      { headers: getAuthHeaders() }
-    );
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Update profile error:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
+  const response = await axios.put(
+    `${BASE_URL}/users/update-profile`,
+    {
+      email,
+      username,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //Return a promise
+  return response.data;
 };

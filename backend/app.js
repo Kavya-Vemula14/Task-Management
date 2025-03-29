@@ -28,8 +28,8 @@ app.use(cors(corsOptions));
 app.get("/", (req, res) => {
   res.send("Backend is working!");
 });
-app.use("/", userRouter);
-app.use("/", taskRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/tasks", taskRouter);
 //!eerror
 app.use(errorHandler);
 //middleware
