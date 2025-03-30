@@ -4,13 +4,25 @@ const taskController = require("../controllers/taskCtrl");
 const taskRouter = express.Router();
 
 //add
-taskRouter.post("/create", isAuthenticated, taskController.create);
+taskRouter.post("/api/v1/tasks/create", isAuthenticated, taskController.create);
 //lists
-taskRouter.get("/lists", isAuthenticated, taskController.lists);
+taskRouter.get("/api/v1/tasks/lists", isAuthenticated, taskController.lists);
 //listbyid
-taskRouter.get("/listbyid/:id", isAuthenticated, taskController.listid);
+taskRouter.get(
+  "/api/v1/tasks/listbyid/:id",
+  isAuthenticated,
+  taskController.listid
+);
 //update
-taskRouter.put("/update/:id", isAuthenticated, taskController.update);
+taskRouter.put(
+  "/api/v1/tasks/update/:id",
+  isAuthenticated,
+  taskController.update
+);
 //delete
-taskRouter.delete("/delete/:id", isAuthenticated, taskController.delete);
+taskRouter.delete(
+  "/api/v1/tasks/delete/:id",
+  isAuthenticated,
+  taskController.delete
+);
 module.exports = taskRouter;
