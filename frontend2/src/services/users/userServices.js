@@ -1,7 +1,7 @@
 import axios from "axios";
-//import { BASE_URL } from "../../utils/url";
+import { BASE_URL } from "../../utils/url";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
-const BASE_URL = "/api/v1";
+
 //! Get the token
 const token = getUserFromStorage();
 //! Login

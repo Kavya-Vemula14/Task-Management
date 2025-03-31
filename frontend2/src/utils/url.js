@@ -1,1 +1,1 @@
-//export const BASE_URL = "http://localhost:8000/api/v1";
+export const BASE_URL = "https://task-management-7cd8.onrender.com/api/v1";
