@@ -17,8 +17,11 @@ mongoose
 //middleware
 //! Cors config
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["http://localhost:5173", "https://task-management-frontend2-ashy.vercel.app"],
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true, // Allow cookies if needed
 };
+
 app.use(cors(corsOptions));
 //!Middlewares
 
@@ -35,6 +38,7 @@ app.use(errorHandler);
 //start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`server is running on this port ${PORT}`));
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Backend is working!");
 });
+module.exports=app;
